@@ -59,10 +59,10 @@ function events(state = {events:{}}, action) {
   }
 }
 
-export function getEvents(state = {events: []}, action){
+export function getEvents(state = { events: [] }, action){
   switch (action.type){
       case GET_EVENTS:{
-        return Object.assign({},state,action.events)
+        return Object.assign({},state,{ events: action.events })
       }
       default:{
         console.log("o entro")

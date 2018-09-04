@@ -15,17 +15,17 @@ import { getEvents } from '../redux/actions/actions';
 
 class App extends Component {
 
-/*
+
   componentWillMount(){
    // super();
     this.props.dispatch(getEvents());
-    //this.setState(this.props.getEvents());
-  }*/
+  //  this.setState(this.props.dispatch.getEvents());
+  }
 
   render() {
     const { dispatch, events, isAuthenticated, errorMessage, isSecretQuote } = this.props
     console.log(this.props, "LA CONCHA DE TU MADRE");
-    
+   // debugger;
     return (
       <div>
         <Navbar
