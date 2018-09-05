@@ -101,8 +101,8 @@ app.get('/events', function (req, res) {
   // console.log("aca tambien")
   try {
     Event.find({}, function(err,events){
-      console.log(err);
-      console.log(events);
+      // console.log(err);
+       console.log(events);
         if (err)
             res.send(err)
         else if (!events)
@@ -120,6 +120,26 @@ app.get('/events', function (req, res) {
     })
   }catch(err){console.log(err)};
         //res.send("outo")
+});
+
+app.post('/event/find', function (req, res) {
+   /***
+        ***BUSCAR EVENTO
+        ***/
+      let {id} = req.body;
+      console.log("id-",id)
+      // Event.findById(id);
+      Event.findById(id, function (err, event) {
+            if (err)
+                res.send(err)
+            else if (!event){
+              console.log("puto el que lee")
+              res.send(404)
+            }
+            else {
+                res.send(JSON.stringify(event));
+            }
+       });
 });
 
 app.post('/sessions/create', function(req, res) {

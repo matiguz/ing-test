@@ -2,7 +2,8 @@
 
 import { combineReducers } from 'redux'
 import {
-  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, GET_EVENTS
+  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, 
+  GET_EVENTS, GET_EVENT_VIEW, BACK_EVENT_VIEW
 } from '../actions/actions'
 
 // The auth reducer. The starting state sets authentication
@@ -41,33 +42,19 @@ function auth(state = {
   }
 }
 
-// The quotes reducer
-function quotes(state = {}, action) {
-  switch (action.type) {
-
-    default:
-      return state
-  }
-}
-
-// The quotes reducer
-function events(state = {events:{}}, action) {
-  switch (action.type) {
-
-    default:
-      return state
-  }
-}
-
-export function getEvents(state = { events: [] }, action){
+export function events(state = { events: [], eventView:{} }, action){
   switch (action.type){
       case GET_EVENTS:{
         return Object.assign({},state,{ events: action.events })
       }
+      case GET_EVENT_VIEW:{
+        return Object.assign({},state,{ eventView: action.event })
+      }
+      case BACK_EVENT_VIEW:{
+        return Object.assign({},state,{ eventView: {} })
+      }
       default:{
-        console.log("o entro")
         return state
-
       }
   }
 }
@@ -76,7 +63,7 @@ export function getEvents(state = { events: [] }, action){
 // can be left split apart above
 const quotesApp = combineReducers({
   auth,
-  getEvents
+  events
 })
 
 export default quotesApp
