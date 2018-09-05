@@ -11,7 +11,7 @@ export default class Navbar extends Component {
 
   render() {
     const { dispatch, isAuthenticated, errorMessage } = this.props
-
+    debugger;
     return (
       <nav className='navbar navbar-default'>
         <div className='container-fluid'>

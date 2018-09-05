@@ -8,7 +8,7 @@ var eventSchema = mongoose.Schema({
     place: String,
     author: { 
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Author'
+        ref: 'User'
     },
     days: [{
             type: Date,

@@ -10,23 +10,41 @@ import EventCard from '../components/EventCard'
 import EventForm from '../components/EventForm'
 import { getEvents } from '../redux/actions/actions';
 import EventView from '../components/EventView';
+// import Paginator from "react-paginator";
+// import Pagination from 'react-paginating';
+import Pagination from "react-js-pagination";
 import { debug } from 'util';
-
-
-//import Quotes from '../components/Quotes'
 
 class App extends Component {
 
+  constructor(){
+    super();
+    this.state = {
+      activePage: 1,
+      eventsPerPage:6,
+      total: 0
+    };
+    this.handlePageChange = this.handlePageChange.bind(this)
+  }
+ 
+  handlePageChange(pageNumber) {
+    this.setState({activePage: pageNumber});
+  }
 
   componentWillMount() {
     // super();
     this.props.dispatch(getEvents());
-    //  this.setState(this.props.dispatch.getEvents());
+    const { events } = this.props;
+    this.setState({total : events.length})
   }
 
   render() {
     const { dispatch, events, isAuthenticated, errorMessage, eventView, isSecretQuote } = this.props
-    console.log(this.props, "LA CONCHA DE TU MADRE");
+    console.log(events.length);
+  //  this.setState({total : events.length})
+    console.log(this.state);
+    let cant = this.props.events.length;
+    debugger;
     return (
       <div>
         <Navbar
@@ -43,12 +61,30 @@ class App extends Component {
                 <EventForm
                   isAuthenticated={isAuthenticated}
                   dispatch={dispatch}
-                />
-                  {events.map((event) => (
-                  <EventCard event={event}
-                    dispatch={dispatch} />
-                ))}
-                </div>
+                /><div className="container">
+                <div className="row">
+                    {events.map((event,key) => {
+                      if ((this.state.eventsPerPage * this.state.activePage - this.state.eventsPerPage -1 < key) &&
+                          (this.state.eventsPerPage * this.state.activePage > key)) {
+                            return <EventCard event={event}
+                                            dispatch={dispatch} />
+                        }
+                   } )
+                   
+                   }
+                  </div>
+                  </div>
+                  { <Pagination
+                    activePage={this.state.activePage}
+                    itemsCountPerPage={this.state.eventsPerPage}
+                    totalItemsCount={cant}
+                    pageRangeDisplayed={5}
+                    onChange={this.handlePageChange}
+                          /> }
+                  </div>
+                  
+                
+
           }
         </div>
       </div>

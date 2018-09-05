@@ -7,8 +7,10 @@ var logger          = require('morgan'),
     bodyParser      = require('body-parser'),
     mongoose         = require('mongoose');
 
-var app = express();
+    const routes = require('./routes/')
 
+var app = express();
+const router = express.Router();
 const url = process.env.MONGODB_URI || "mongodb://localhost:27017/mdb"
 
 dotenv.load();
@@ -21,6 +23,9 @@ try {
 } catch (error) {
   console.log(error);
 }
+
+/** set up routes {API Endpoints} */
+routes(router)
 
 // Parsers
 // old version of line
@@ -43,9 +48,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(errorhandler())
 }
 
-app.use(require('./anonymous-routes'));
-app.use(require('./protected-routes'));
-app.use(require('./user-routes'));
+app.use(router);
 
 var port = process.env.PORT || 3001;
 

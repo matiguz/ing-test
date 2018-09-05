@@ -73,7 +73,7 @@ export function loginUser(creds) {
         } else {
           // If login was successful, set the token in local storage
           localStorage.setItem('id_token', user.id_token)
-          localStorage.setItem('id_token', user.access_token)
+          localStorage.setItem('access_token', user.access_token)
           // Dispatch the success action
           dispatch(receiveLogin(user))
         }
@@ -136,9 +136,9 @@ export function getEventView(id) {
 
 export function addEvent (state) {
   return (dispatch) => {
-      
-      axios.post('http://localhost:3001/event/add',state).then(() => {
-          dispatch( { type: ADD_EVENT})
+        axios.defaults.headers.common['Authorization'] = localStorage.getItem('id_token');
+        axios.post('http://localhost:3001/event/add',state).then(() => {
+        dispatch( { type: ADD_EVENT})
       })
      //alert("puto el que lee");
   }
