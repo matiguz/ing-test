@@ -18,6 +18,7 @@ export const LOGOUT_FAILURE = 'LOGOUT_FAILURE'
 export const GET_EVENTS = 'GET_EVENTS'
 export const GET_EVENT_VIEW  = 'GET_EVENT_VIEW'
 export const BACK_EVENT_VIEW  = 'BACK_EVENT_VIEW'
+export const ADD_EVENT  = 'ADD_EVENT'
 
 function requestLogin(creds) {
   return {
@@ -133,10 +134,19 @@ export function getEventView(id) {
 
 }
 
+export function addEvent (state) {
+  return (dispatch) => {
+      
+      axios.post('http://localhost:3001/event/add',state).then(() => {
+          dispatch( { type: ADD_EVENT})
+      })
+     //alert("puto el que lee");
+  }
+}
+
 export function backEventView() {
     
   return dispatch => {
-    debugger;
     dispatch( { type: BACK_EVENT_VIEW })
   }
 

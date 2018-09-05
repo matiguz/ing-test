@@ -142,6 +142,35 @@ app.post('/event/find', function (req, res) {
        });
 });
 
+app.post('/event/add', function (req, res) {
+
+ /***
+        ***CREAR EVENTO
+        ***/
+       let title = req.body.title;
+       let description = req.body.description;
+       let picture = req.body.picture;
+       let place = req.body.place;
+       //AUTHORlet  = req.body.title;
+       let days = req.body.days;
+       
+        let event = new Event({
+            _id: new mongoose.Types.ObjectId(),
+            title: title,
+            description: description,
+            picture: picture,
+            place: place,
+            author: "5b8ac8fe4417db0e97ccf2d8",
+            days: [days]
+            
+        });
+
+        event.save(function(err){
+            if (err) throw console.log(err);
+            console.log("primer evento, sabelo pelo")
+        })
+});
+
 app.post('/sessions/create', function(req, res) {
 
   var userScheme = getUserScheme(req);

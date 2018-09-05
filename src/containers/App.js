@@ -42,7 +42,6 @@ class App extends Component {
               /> : <div>
                 <EventForm
                   isAuthenticated={isAuthenticated}
-                  errorMessage={errorMessage}
                   dispatch={dispatch}
                 />
                   {events.map((event) => (

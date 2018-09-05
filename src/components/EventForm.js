@@ -29,15 +29,21 @@ export default class EventForm extends Component {
     }
 
     handleSubmit(e) {
+        const { dispatch } = this.props
+
+       // e.preventDefault();
+        console.log("deberia guardar aca");
+        this.state;
+        dispatch(addEvent(this.state));
         // e.preventDefault();
-        this.props.addEvent(this.state);
+        //this.props.addEvent(this.state);
         //LLAMAR A PERSISTENCIA
         //this.props.onAddEvent(this.state);
     }
 
     render() {
 
-        const { dispatch, isAuthenticated, errorMessage } = this.props
+        const { isAuthenticated } = this.props
 
         return (
             <div>
