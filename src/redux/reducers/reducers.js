@@ -43,12 +43,13 @@ function auth(state = {
 }
 
 export function events(state = { events: [], eventView:{}, isAddEvent:false }, action){
+  debugger;  
   switch (action.type){
       case GET_EVENTS:{
         return Object.assign({},state,{ events: action.events })
       }
       case GET_EVENT_VIEW:{
-        return Object.assign({},state,{                                                                                                                                               })
+        return Object.assign({},state,{ eventView: action.event })                                                                                                                                       
       }
       case BACK_EVENT_VIEW:{
         return Object.assign({},state,{ eventView: {} })

@@ -114,9 +114,7 @@ export function getEvents() {
     
   return dispatch => {
       axios.get('http://localhost:3001/events').then((response) => {
-        
-        console.log("viene la data", response.data)
-          dispatch( { type: GET_EVENTS, events: response.data})
+        dispatch( { type: GET_EVENTS, events: response.data})
       })
   }
 
@@ -138,8 +136,10 @@ export function addEvent (state) {
       debugger;
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('id_token');
         axios.post('http://localhost:3001/events/add',state).then(() => {
-        dispatch( { type: ADD_EVENT})
-      })
+          console.log("event add");
+          dispatch( { type: ADD_EVENT })
+
+        })
      //alert("puto el que lee");
   }
 }

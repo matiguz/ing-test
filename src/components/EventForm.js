@@ -20,7 +20,6 @@ export default class EventForm extends Component {
             date: '',
 
         }
-        this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
@@ -32,12 +31,6 @@ export default class EventForm extends Component {
         })
     }
 
-    handleSubmit(e) {
-        const { dispatch } = this.props
-        e.preventDefault();
-        dispatch(addEvent(this.state));
-    }
-
     handleChange(date) {
         this.setState({
           date: date
@@ -45,12 +38,11 @@ export default class EventForm extends Component {
       }
 
     render() {
-
+        const { dispatch } = this.props        
         return (
             <div>
                     <div className="col-sm-4>">
                         <div className="card eventCard">
-                            <form className="card-body" onSubmit={this.handleSubmit}>
                                 <label className="label label-info">Create Event</label>
                                 <div className="form-group">
                                     <input
@@ -98,9 +90,7 @@ export default class EventForm extends Component {
                                         onChange={this.handleInput}
                                     />
                                 </div>
-                                <button type="submit" className="btn btn-info">Save</button>
-
-                            </form>
+                                <button type="submit" className="btn btn-info" onClick={() => {dispatch(addEvent())}}>Save</button>
                         </div>
 
                     </div>
