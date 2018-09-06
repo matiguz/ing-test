@@ -8,12 +8,15 @@ import Login from '../components/Login'
 import Navbar from '../components/Navbar'
 import EventCard from '../components/EventCard'
 import EventForm from '../components/EventForm'
+import Footer from '../components/Footer'
 import { getEvents } from '../redux/actions/actions';
 import EventView from '../components/EventView';
 // import Paginator from "react-paginator";
 // import Pagination from 'react-paginating';
 import Pagination from "react-js-pagination";
 import { debug } from 'util';
+import './../styles/app.css'
+
 
 class App extends Component {
 
@@ -39,18 +42,18 @@ class App extends Component {
   }
 
   render() {
-    const { dispatch, events, isAuthenticated, errorMessage, eventView, isSecretQuote } = this.props
+    const { dispatch, events, isAuthenticated, isAddEvent, errorMessage, eventView, isSecretQuote } = this.props
     console.log(events.length);
   //  this.setState({total : events.length})
     console.log(this.state);
     let cant = this.props.events.length;
-    debugger;
     return (
-      <div>
+      <div className="content-fluid container-body">
         <Navbar
           isAuthenticated={isAuthenticated}
           errorMessage={errorMessage}
           dispatch={dispatch}
+          eventView={eventView}
         />
         <div className='container'>
           {Object.entries(eventView).length !== 0 ?
@@ -58,10 +61,12 @@ class App extends Component {
                 event={eventView}
                 dispatch={dispatch}
               /> : <div>
-                <EventForm
-                  isAuthenticated={isAuthenticated}
-                  dispatch={dispatch}
-                /><div className="container">
+                  {isAddEvent ? 
+                    <EventForm
+                     dispatch={dispatch}
+                    />
+                  :
+              <div className="container">
                 <div className="row">
                     {events.map((event,key) => {
                       if ((this.state.eventsPerPage * this.state.activePage - this.state.eventsPerPage -1 < key) &&
@@ -73,7 +78,6 @@ class App extends Component {
                    
                    }
                   </div>
-                  </div>
                   { <Pagination
                     activePage={this.state.activePage}
                     itemsCountPerPage={this.state.eventsPerPage}
@@ -81,12 +85,18 @@ class App extends Component {
                     pageRangeDisplayed={5}
                     onChange={this.handlePageChange}
                           /> }
+                  </div>}
+                  
                   </div>
                   
                 
 
           }
         </div>
+        <Footer 
+          isAuthenticated={isAuthenticated}
+          dispatch={dispatch}
+        />
       </div>
     )
   }
@@ -106,9 +116,11 @@ function mapStateToProps(state) {
 
   const { events, auth } = state
   const { isAuthenticated, errorMessage } = auth
+  debugger;
   return {
     events: events.events,
     eventView: events.eventView,
+    isAddEvent: events.isAddEvent,
     isAuthenticated,
     errorMessage,
   }

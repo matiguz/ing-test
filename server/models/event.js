@@ -10,10 +10,10 @@ var eventSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'User'
     },
-    days: [{
+    days: {
             type: Date,
             default: Date.now
-    }]
+    }
     
 });
  

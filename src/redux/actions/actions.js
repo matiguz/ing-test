@@ -19,6 +19,7 @@ export const GET_EVENTS = 'GET_EVENTS'
 export const GET_EVENT_VIEW  = 'GET_EVENT_VIEW'
 export const BACK_EVENT_VIEW  = 'BACK_EVENT_VIEW'
 export const ADD_EVENT  = 'ADD_EVENT'
+export const ADD_EVENT_VIEW  = 'ADD_EVENT_VIEW'
 
 function requestLogin(creds) {
   return {
@@ -125,9 +126,7 @@ export function getEventView(id) {
     
   return dispatch => {
       let req = {'id':id};
-      axios.post('http://localhost:3001/event/find',req).then((response) => {
-        
-        console.log("viene el view", response.data)
+      axios.post('http://localhost:3001/events/find',req).then((response) => {
           dispatch( { type: GET_EVENT_VIEW, event: response.data})
       })
   }
@@ -136,8 +135,9 @@ export function getEventView(id) {
 
 export function addEvent (state) {
   return (dispatch) => {
+      debugger;
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('id_token');
-        axios.post('http://localhost:3001/event/add',state).then(() => {
+        axios.post('http://localhost:3001/events/add',state).then(() => {
         dispatch( { type: ADD_EVENT})
       })
      //alert("puto el que lee");
@@ -148,6 +148,13 @@ export function backEventView() {
     
   return dispatch => {
     dispatch( { type: BACK_EVENT_VIEW })
+  }
+
+}
+
+export function AddEventView() {
+  return dispatch => {
+    dispatch( { type: ADD_EVENT_VIEW })
   }
 
 }

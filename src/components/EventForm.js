@@ -34,15 +34,8 @@ export default class EventForm extends Component {
 
     handleSubmit(e) {
         const { dispatch } = this.props
-
-       // e.preventDefault();
-        console.log("deberia guardar aca");
-        this.state;
+        e.preventDefault();
         dispatch(addEvent(this.state));
-        // e.preventDefault();
-        //this.props.addEvent(this.state);
-        //LLAMAR A PERSISTENCIA
-        //this.props.onAddEvent(this.state);
     }
 
     handleChange(date) {
@@ -53,11 +46,8 @@ export default class EventForm extends Component {
 
     render() {
 
-        const { isAuthenticated } = this.props
-
         return (
             <div>
-                {isAuthenticated &&
                     <div className="col-sm-4>">
                         <div className="card eventCard">
                             <form className="card-body" onSubmit={this.handleSubmit}>
@@ -114,7 +104,6 @@ export default class EventForm extends Component {
                         </div>
 
                     </div>
-                }
             </div>
         );
     }

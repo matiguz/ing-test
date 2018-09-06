@@ -37,7 +37,7 @@ module.exports = {
         if(resToken.username = "pito"){
             let title = req.body.title;
             let description = req.body.description;
-            let picture = req.body.picture;
+            let picture = req.body.url_picture;
             let place = req.body.place;
             let days = req.body.days;
             
@@ -48,7 +48,7 @@ module.exports = {
                 picture: picture,
                 place: place,
                 author: "5b8ac8fe4417db0e97ccf2d8",
-                days: [days]
+                days: Date(days)
                 
             });
 

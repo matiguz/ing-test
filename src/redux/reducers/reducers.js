@@ -3,7 +3,7 @@
 import { combineReducers } from 'redux'
 import {
   LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, 
-  GET_EVENTS, GET_EVENT_VIEW, BACK_EVENT_VIEW, ADD_EVENT
+  GET_EVENTS, GET_EVENT_VIEW, BACK_EVENT_VIEW, ADD_EVENT, ADD_EVENT_VIEW
 } from '../actions/actions'
 
 // The auth reducer. The starting state sets authentication
@@ -42,19 +42,22 @@ function auth(state = {
   }
 }
 
-export function events(state = { events: [], eventView:{} }, action){
+export function events(state = { events: [], eventView:{}, isAddEvent:false }, action){
   switch (action.type){
       case GET_EVENTS:{
         return Object.assign({},state,{ events: action.events })
       }
       case GET_EVENT_VIEW:{
-        return Object.assign({},state,{ eventView: action.event })
+        return Object.assign({},state,{                                                                                                                                               })
       }
       case BACK_EVENT_VIEW:{
         return Object.assign({},state,{ eventView: {} })
       }
+      case ADD_EVENT_VIEW:{
+        return Object.assign({},state,{ isAddEvent: true })
+      }
       case ADD_EVENT:{
-        return state
+        return Object.assign({},state,{ isAddEvent: false })
       }
       default:{
         return state
