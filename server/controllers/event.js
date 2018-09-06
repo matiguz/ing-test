@@ -33,8 +33,9 @@ module.exports = {
         
         let token = req.headers.authorization;
         let resToken = cUser.verifyAccessToken(token);
-        console.log(req)
+        //console.log(req)
         if(resToken.username = "pito"){
+            console.log("vino pal pito");
             let title = req.body.title;
             let description = req.body.description;
             let picture = req.body.url_picture;
@@ -55,6 +56,7 @@ module.exports = {
             event.save(function(err){
                 if (err) throw console.log(err);
             })
+            res.status(201).send("Alta correcta");
         }
     },
 
