@@ -13,9 +13,9 @@ export default class Navbar extends Component {
     const { dispatch, isAuthenticated, errorMessage } = this.props
     debugger;
     return (
-      <nav className='navbar navbar-default'>
+      <nav className='navbar navbar-dark bg-dark'>
         <div className='container-fluid'>
-          <p className="navbar-brand">Events App</p>
+          <h1 className="text-white">Events</h1>
           <div className='navbar-form'>
 
             {!isAuthenticated &&

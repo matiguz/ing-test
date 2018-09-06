@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { addEvent } from '../redux/actions/actions';
 import { connect } from 'react-redux';
+import { FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap';
+import './../styles/eventCard.css'
+
 
 
 
@@ -14,11 +17,12 @@ export default class EventForm extends Component {
             description: '',
             url_picture: '',
             place: '',
-            date: ''
+            date: '',
 
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInput = this.handleInput.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     handleInput(e) {
@@ -40,6 +44,12 @@ export default class EventForm extends Component {
         //LLAMAR A PERSISTENCIA
         //this.props.onAddEvent(this.state);
     }
+
+    handleChange(date) {
+        this.setState({
+          date: date
+        });
+      }
 
     render() {
 
@@ -91,9 +101,9 @@ export default class EventForm extends Component {
 
                                 <div className="form-group">
                                     <input
-                                        type="text"
+                                        type="date"
                                         name="date"
-                                        className="form-control"
+                                        className="datepicker"
                                         placeholder="Date...DD/MM/AAAA"
                                         onChange={this.handleInput}
                                     />

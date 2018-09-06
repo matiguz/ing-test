@@ -10,14 +10,20 @@ export default class Login extends Component {
 
     return (
       <div>
-        <input type='text' ref='username' className="form-control" styles="" placeholder='Username'/>
-        <input type='password' ref='password' className="form-control" styles="" placeholder='Password'/>
-        <button onClick={(event) => this.handleClick(event)} className="btn btn-primary">
-          Login
-        </button>
+          <div className="float-left ml-3 mt-3 pb-3">
+            <input type='text' ref='username' className="form-control" styles="" placeholder='Username'/>
+          </div>
+          <div className="float-left ml-3 mt-3 pb-3">
+            <input type='password' ref='password' className="form-control" styles="" placeholder='Password'/>
+            </div>
+          <div className="float-left ml-3 mt-3 pb-3">
+            <button onClick={(event) => this.handleClick(event)} className="btn btn-secondary">
+              Login
+            </button>
+          </div>        
 
         {errorMessage &&
-          <p styles="">{errorMessage}</p>
+          <p className="text-white">{errorMessage}</p>
         }
       </div>
     )
